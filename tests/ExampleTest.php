@@ -6,7 +6,6 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-
 test('example test', function () {
     Http::fake();
 
@@ -26,7 +25,6 @@ test('example test', function () {
         return $request;
     });
 });
-
 
 test('cache bulunmayan sayfalarda session cookie mevcut olmalıdır', function () {
     $response = $this->get(route('cloudflare_cache.home'));

@@ -1,10 +1,10 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Yediyuz\CloudflareCache\Services;
 
 use Illuminate\Http\Client\Response;
+
 interface CloudflareServiceInterface
 {
     /**

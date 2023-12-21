@@ -6,6 +6,7 @@ namespace Yediyuz\CloudflareCache;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use ReflectionException;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Yediyuz\CloudflareCache\Commands\CloudflareCacheCommand;
@@ -23,7 +24,7 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
     }
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function packageRegistered(): void
     {

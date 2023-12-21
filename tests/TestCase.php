@@ -3,7 +3,6 @@
 declare(strict_types=1);
 namespace Yediyuz\CloudflareCache\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;

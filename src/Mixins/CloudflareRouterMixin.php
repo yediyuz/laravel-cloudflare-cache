@@ -1,11 +1,9 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Yediyuz\CloudflareCache\Mixins;
 
 use Closure;
-use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Arr;
 use Yediyuz\CloudflareCache\CloudflareCache;
 use Yediyuz\CloudflareCache\CloudflarePagesMiddleware;
