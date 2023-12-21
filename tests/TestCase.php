@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 namespace Yediyuz\CloudflareCache\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
