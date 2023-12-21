@@ -33,8 +33,8 @@ Please see [CONTRIBUTING](https://github.com/yediyuz/.github/blob/master/CONTRIB
 If you've found a bug regarding security please mail security@yediyuz.com instead of using the issue tracker.
 
 ## Credits
-- [Mert Aşan](https://github.com/mertasan)
 - [Emre Dipi](https://github.com/emredipi)
+- [Mert Aşan](https://github.com/mertasan)
 - [All Contributors](../../contributors)
 
 ## License
