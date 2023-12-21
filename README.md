@@ -1,8 +1,10 @@
 # Laravel Cloudflare Cache
 
-[![Tests](https://img.shields.io/github/workflow/status/yediyuz/laravel-cloudflare-cache/tests?label=tests)](https://github.com/yediyuz/laravel-cloudflare-cache/actions/workflows/tests.yml)
-[![Packagist](https://img.shields.io/packagist/v/yediyuz/laravel-cloudflare-cache.svg?style=flat-square)](https://packagist.org/packages/yediyuz/laravel-cloudflare-cache)
-<!-- [![Total Downloads](https://img.shields.io/packagist/dt/yediyuz/laravel-cloudflare-cache.svg?style=flat-square)](https://packagist.org/packages/yediyuz/laravel-cloudflare-cache) -->
+<p>
+    <a href="https://github.com/yediyuz/laravel-cloudflare-cache/actions"><img src="https://img.shields.io/github/actions/workflow/status/yediyuz/laravel-cloudflare-cache/tests.yml?branch=master&label=tests" alt="Test Status"></a>
+    <a href="https://packagist.org/packages/yediyuz/laravel-cloudflare-cache"><img src="https://img.shields.io/packagist/v/yediyuz/laravel-cloudflare-cache.svg?style=flat-square" alt="Latest Release"></a>
+    <a href="https://github.com/mertasan/tailwindcss-variables/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?label=license" alt="License"></a>
+</p>
 
 ## Installation
 
@@ -10,21 +12,6 @@ You can install the package via composer:
 
 ```bash
 composer require yediyuz/laravel-cloudflare-cache
-```
-
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-cloudflare-cache-config"
-```
-
-
-## Usage
-
-```php
-$cloudflareCache = new Yediyuz\CloudflareCache();
-echo $cloudflareCache->echoPhrase('Hello, Yediyuz!');
 ```
 
 ## Testing
