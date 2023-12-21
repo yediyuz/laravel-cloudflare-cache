@@ -10,34 +10,37 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Mert",
-            "email": "mertemreasan@gmail.com",
+            "name": "Emre Dipi",
+            "email": "mail@emredipi.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mert Aşan",
+            "email": "mert@yediyuz.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^9.0"
+        "guzzlehttp/guzzle": "^7.8",
+        "illuminate/contracts": "^10.10",
+        "illuminate/routing": "^10.10",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "laravel/framework": "^10.10",
         "yediyuz/dev-tools": "1.x-dev",
-        "nunomaduro/collision": "^6.0",
-        "nunomaduro/larastan": "^2.1.6",
-        "orchestra/testbench": "^7.0",
-        "pestphp/pest": "^1.21.3",
-        "pestphp/pest-plugin-laravel": "^1.2.0",
-        "pestphp/pest-plugin-parallel": "^1.1.0",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "^1.7.1",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.29.6"
+        "nunomaduro/collision": "^7.0",
+        "orchestra/testbench": "^8.18",
+        "pestphp/pest": "^2.28",
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpcov": "^9.0.2",
+        "spatie/laravel-ray": "^1.32"
     },
     "autoload": {
         "psr-4": {
-            "Yediyuz\\CloudflareCache\\": "src",
-            "Yediyuz\\CloudflareCache\\Database\\Factories\\": "database/factories"
+            "Yediyuz\\CloudflareCache\\": "src"
         }
     },
     "autoload-dev": {
@@ -48,6 +51,8 @@
     "scripts": {
         "lint": "php-cs-fixer fix -v",
         "test": "vendor/bin/pest --colors=always --parallel",
+        "test:coverage": "@test --coverage-php ./coverage/cov/default.cov",
+        "test:coverage:html": "@test --coverage-html coverage/html/default",
         "test:lint": "php-cs-fixer fix -v --dry-run",
         "test:styles": "vendor/bin/phpstan analyse --ansi",
         "test:styles:pro": "vendor/bin/phpstan analyse --pro --fix --watch"
