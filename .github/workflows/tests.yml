@@ -84,7 +84,7 @@ jobs:
         run: vendor/bin/pest --colors=always --coverage-clover coverage/reports/${{ matrix.coverage-file }}-report.xml
         # <deleteCodecov> #
       - name: Upload Coverage
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: "github.repository_owner == ':vendor_name'"
         with:
           path: coverage/reports/${{ matrix.coverage-file }}-report.xml
