@@ -4,8 +4,7 @@ includes:
 parameters:
     level: 8
     paths:
-      - src # <hasConfig> #
-      - config # </hasConfig> # # <hasDatabase> #
-      - database # </hasDatabase> #
+      - src 
+      - config  
 
     tmpDir: build/phpstan

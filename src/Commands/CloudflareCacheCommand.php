@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace VendorName\Skeleton\Commands;
+namespace Yediyuz\CloudflareCache\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CloudflareCacheCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-cloudflare-cache';
 
     public $description = 'My command';
 

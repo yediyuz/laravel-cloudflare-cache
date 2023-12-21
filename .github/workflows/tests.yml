@@ -36,7 +36,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           tools: composer:v2, php-cs-fixer, phpunit
-          coverage: :coverage_value
+          coverage: none
 
       - name: Validate Composer
         run: composer validate
@@ -75,57 +75,10 @@ jobs:
         #- name: Remove auth.json File
         #  run: rm -f $GITHUB_WORKSPACE/auth.json
 
-        # <deleteCoverageElse> #
+        
       - name: Run Tests
         run: composer test
-        # </deleteCoverageElse> #
-        # <deleteCoverage> #
-      - name: Run Tests (with Coverage)
-        run: vendor/bin/pest --colors=always --coverage-clover coverage/reports/${{ matrix.coverage-file }}-report.xml
-        # <deleteCodecov> #
-      - name: Upload Coverage
-        uses: actions/upload-artifact@v3
-        if: "github.repository_owner == ':vendor_name'"
-        with:
-          path: coverage/reports/${{ matrix.coverage-file }}-report.xml
-        # </deleteCodecov> #
-        # </deleteCoverage> #
+        
+        
 
-  # <deleteCoverage> #
-  # <deleteCodecov> #
-  coverage-upload:
-    if: "github.repository_owner == ':vendor_name' && !contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip test') && !contains(github.event.head_commit.message, 'skip coverage')"
-    needs: tests
-    runs-on: ubuntu-latest
-    name: Coverage Reports
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download Coverage Files
-        uses: actions/download-artifact@v3
-        with:
-          path: coverage/reports
-
-      - name: Display Downloaded Coverage Files
-        run: ls -R
-        working-directory: coverage/reports
-
-      - name: Get Coverage Files
-        run: |
-          echo "::set-output name=COVERAGE_FILES::$(ls ./coverage/reports/artifact | sed -n '/-report.xml/s/.*/\.\/coverage\/reports\/artifact\/&/p' | xargs | sed -e 's/ /,/g')"
-        id: coverages
-
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          env_vars: OS
-          fail_ci_if_error: true
-          files: ${{ steps.coverages.outputs.COVERAGE_FILES }}
-          flags: tests
-          name: codecov-umbrella
-          verbose: true
-# </deleteCodecov> #
-# </deleteCoverage> #
+  
