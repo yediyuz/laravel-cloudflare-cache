@@ -1,0 +1,48 @@
+name: Check & Fix Styling
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip lint')"
+
+    strategy:
+      matrix:
+        php-version: [ 8.1 ]
+        #dependency-versions: [ lowest, highest ]
+        dependency-versions: [ lowest ]
+
+    name: PHP ${{ matrix.php-version }} | ${{ matrix.dependency-versions }}
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2, php-cs-fixer
+
+      #- name: Add HTTP Basic Auth Credentials
+      #  run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
+      - name: Install Composer Dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependency-versions }}
+          composer-options: "--optimize-autoloader --no-interaction --no-progress"
+
+      #- name: Remove auth.json File
+      #  run: rm -f $GITHUB_WORKSPACE/auth.json
+
+      - name: Run Code Style Check
+        run: composer lint
+
+      - name: 🟢 Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Fix styling

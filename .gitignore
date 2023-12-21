@@ -1,0 +1,15 @@
+.idea
+.php_c
+.php_cs.cache
+.php-cs-fixer.cache
+.phpunit.result.cache
+build
+composer.lock
+node_modules
+coverage
+phpunit.xml
+vendor
+.DS_Store
+/ray.php
+.env
+scratches

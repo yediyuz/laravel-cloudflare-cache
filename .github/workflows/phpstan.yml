@@ -1,0 +1,37 @@
+name: PHPStan
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - 'phpstan.neon.dist'
+
+jobs:
+  phpstan:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip styles')"
+
+    strategy:
+      matrix:
+        php-version: [ 8.1 ]
+        #dependency-versions: [ lowest, highest ]
+        dependency-versions: [ lowest ]
+
+    name: PHP ${{ matrix.php-version }} | ${{ matrix.dependency-versions }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+
+      - name: Install Composer Dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependency-versions }}
+          composer-options: "--optimize-autoloader --no-interaction --no-progress"
+
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan --error-format=github

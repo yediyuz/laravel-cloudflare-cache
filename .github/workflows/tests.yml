@@ -1,0 +1,131 @@
+name: Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    types: [ ready_for_review, synchronize, opened ]
+
+jobs:
+
+  tests:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip test')"
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version: [ 8.1 ]
+        coverage-file: [ default ]
+        laravel: [ 10.* ]
+        stability: [ prefer-lowest, prefer-stable ]
+        include:
+          - laravel: 10.*
+            testbench: 8.18.*
+
+    name: PHP ${{ matrix.php-version }} - L${{ matrix.laravel }} - T${{ matrix.testbench }} - ${{ matrix.stability }}
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          tools: composer:v2, php-cs-fixer, phpunit
+          coverage: :coverage_value
+
+      - name: Validate Composer
+        run: composer validate
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: dependencies-laravel-${{ matrix.php-version }}-${{ matrix.laravel }}-${{ matrix.testbench }}-${{ matrix.stability }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            dependencies-laravel-${{ matrix.php-version }}-${{ matrix.laravel }}-${{ matrix.testbench }}-${{ matrix.stability }}-composer-
+            dependencies-laravel-${{ matrix.php-version }}-${{ matrix.laravel }}-${{ matrix.testbench }}-${{ matrix.stability }}-
+            dependencies-laravel-${{ matrix.php-version }}-${{ matrix.laravel }}-${{ matrix.testbench }}-
+            dependencies-laravel-${{ matrix.php-version }}-${{ matrix.laravel }}-
+            dependencies-laravel-${{ matrix.php-version }}-
+            dependencies-laravel-
+
+      - name: Setup Problem Matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      #- name: Add HTTP Basic Auth Credentials
+      #  run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+
+      - name: Install Composer Dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --no-suggest
+
+        #- name: Remove auth.json File
+        #  run: rm -f $GITHUB_WORKSPACE/auth.json
+
+        # <deleteCoverageElse> #
+      - name: Run Tests
+        run: composer test
+        # </deleteCoverageElse> #
+        # <deleteCoverage> #
+      - name: Run Tests (with Coverage)
+        run: vendor/bin/pest --colors=always --coverage-clover coverage/reports/${{ matrix.coverage-file }}-report.xml
+        # <deleteCodecov> #
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v3
+        if: "github.repository_owner == ':vendor_name'"
+        with:
+          path: coverage/reports/${{ matrix.coverage-file }}-report.xml
+        # </deleteCodecov> #
+        # </deleteCoverage> #
+
+  # <deleteCoverage> #
+  # <deleteCodecov> #
+  coverage-upload:
+    if: "github.repository_owner == ':vendor_name' && !contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip test') && !contains(github.event.head_commit.message, 'skip coverage')"
+    needs: tests
+    runs-on: ubuntu-latest
+    name: Coverage Reports
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download Coverage Files
+        uses: actions/download-artifact@v3
+        with:
+          path: coverage/reports
+
+      - name: Display Downloaded Coverage Files
+        run: ls -R
+        working-directory: coverage/reports
+
+      - name: Get Coverage Files
+        run: |
+          echo "::set-output name=COVERAGE_FILES::$(ls ./coverage/reports/artifact | sed -n '/-report.xml/s/.*/\.\/coverage\/reports\/artifact\/&/p' | xargs | sed -e 's/ /,/g')"
+        id: coverages
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          env_vars: OS
+          fail_ci_if_error: true
+          files: ${{ steps.coverages.outputs.COVERAGE_FILES }}
+          flags: tests
+          name: codecov-umbrella
+          verbose: true
+# </deleteCodecov> #
+# </deleteCoverage> #
