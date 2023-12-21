@@ -46,7 +46,8 @@ Please see [CONTRIBUTING](https://github.com/yediyuz/.github/blob/master/CONTRIB
 If you've found a bug regarding security please mail security@yediyuz.com instead of using the issue tracker.
 
 ## Credits
-- [Mert](https://github.com/yediyuz)
+- [Mert Aşan](https://github.com/mertasan)
+- [Emre Dipi](https://github.com/emredipi)
 - [All Contributors](../../contributors)
 
 ## License
