@@ -2,9 +2,12 @@
     "name": "yediyuz/laravel-cloudflare-cache",
     "description": "laravel-cloudflare-cache",
     "keywords": [
-        "yediyuz",
+        "cloudflare",
+        "cache",
+        "cloudflare-cache",
+        "laravel-cloudflare-cache",
         "laravel",
-        "laravel-cloudflare-cache"
+        "yediyuz"
     ],
     "homepage": "https://github.com/yediyuz/laravel-cloudflare-cache",
     "license": "MIT",
