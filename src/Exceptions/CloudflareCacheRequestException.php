@@ -5,10 +5,13 @@ namespace Yediyuz\CloudflareCache\Exceptions;
 
 use RuntimeException;
 
-class CloudflareCacheRequestException extends RuntimeException
+final class CloudflareCacheRequestException extends RuntimeException
 {
     public static function requestError(int $status, string $message, ?int $code): self
     {
-        return new static('Request error: ' . $message . ' | Code: ' . $code, $status); // @phpstan-ignore
+        return new self(
+            message: 'Request error: ' . $message . ' | Code: ' . $code,
+            code: $status
+        );
     }
 }

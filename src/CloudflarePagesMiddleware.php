@@ -21,6 +21,14 @@ class CloudflarePagesMiddleware
         return $response;
     }
 
+    /**
+     * @return array<int, string>
+     */
+    protected function getCacheTags(Request $request): array
+    {
+        return array_merge(array_unique($request->attributes->get(CloudflareCache::TAGS_ATTR, [])));
+    }
+
     public function shouldCacheResponse(Request $request, Response $response): bool
     {
         if (! $request->isMethod('GET')) {

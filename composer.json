@@ -31,15 +31,16 @@
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "larastan/larastan": "^2.0",
         "laravel/framework": "^10.10",
-        "yediyuz/dev-tools": "1.x-dev",
         "nunomaduro/collision": "^7.0",
         "orchestra/testbench": "^8.18",
         "pestphp/pest": "^2.28",
         "pestphp/pest-plugin-laravel": "^2.2",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpcov": "^9.0.2",
-        "spatie/laravel-ray": "^1.32"
+        "spatie/laravel-ray": "^1.32",
+        "yediyuz/dev-tools": "1.x-dev"
     },
     "autoload": {
         "psr-4": {
