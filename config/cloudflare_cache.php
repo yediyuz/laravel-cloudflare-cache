@@ -13,9 +13,5 @@ return [
         \App\Http\Middleware\EncryptCookies::class,
     ],
 
-    'api_email' => env('CLOUDFLARE_EMAIL'),
-
-    'api_key' => env('CLOUDFLARE_KEY'),
-
-    'identifier' => env('CLOUDFLARE_IDENTIFIER'),
+    // The codes written by Emre Dipi will be committed by him.
 ];
