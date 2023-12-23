@@ -32,11 +32,6 @@ class CloudflareRouterMixin
                 $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
             };
 
-            // cache()->group(fun...
-            if (blank($tags)) {
-                return $routeRegistrar();
-            }
-
             // cache(function() { ... }
             if ($tags instanceof Closure) {
                 $registerTtl($ttl);
