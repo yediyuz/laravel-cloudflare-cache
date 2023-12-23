@@ -28,6 +28,10 @@ class CloudflareRouterMixin
             };
 
             $registerTtl = static function ($ttl, $request = null) {
+                if ($ttl === null) {
+                    return;
+                }
+
                 $request = $request ?? request();
                 $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
             };
