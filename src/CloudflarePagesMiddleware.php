@@ -14,7 +14,7 @@ class CloudflarePagesMiddleware
         /** @var Response $response */
         $response = $next($request);
         if ($this->shouldCacheResponse($request, $response)) {
-            $ttl = $request->attributes->get(CloudflareCache::TTL_ATTR) ?? config('cloudflare_cache.cache_ttl', 600);
+            $ttl = $this->getCacheTTL($request);
             $response->headers->add(['Cache-Control' => "max-age=$ttl, public"]);
             $response->headers->remove('set-cookie');
 
@@ -38,6 +38,15 @@ class CloudflarePagesMiddleware
     protected function getCacheTags(Request $request): array
     {
         return array_merge(array_unique($request->attributes->get(CloudflareCache::TAGS_ATTR, [])));
+    }
+
+    protected function getCacheTTL(Request $request): int
+    {
+        if ($request->attributes->has(CloudflareCache::TTL_ATTR)) {
+            return $request->attributes->get(CloudflareCache::TTL_ATTR);
+        }
+
+        return config('cloudflare_cache.cache_ttl', 600);
     }
 
     public function shouldCacheResponse(Request $request, Response $response): bool
