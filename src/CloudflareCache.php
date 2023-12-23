@@ -11,6 +11,8 @@ class CloudflareCache implements CloudflareCacheInterface
 {
     public const TAGS_ATTR = 'cloudflare_tags';
 
+    public const TTL_ATTR = 'cloudflare_cache_ttl';
+
     public function __construct(private readonly CloudflareServiceInterface $service)
     {
         // .
