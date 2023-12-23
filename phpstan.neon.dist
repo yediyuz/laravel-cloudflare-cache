@@ -1,6 +1,6 @@
 includes:
-    - phpstan-baseline.neon
     - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
 
 parameters:
     level: 8
@@ -9,3 +9,6 @@ parameters:
       - config
 
     tmpDir: build/phpstan
+
+    ignoreErrors:
+        - "#^Class App\\\\Http\\\\Middleware\\\\EncryptCookies not found\\.$#"

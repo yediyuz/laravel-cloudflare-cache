@@ -16,9 +16,19 @@ class CloudflarePagesMiddleware
         if ($this->shouldCacheResponse($request, $response)) {
             $response->headers->add(['Cache-Control' => 'max-age=600, public']);
             $response->headers->remove('set-cookie');
+
+            if ($this->hasCacheTags($request)) {
+                $tags = implode(',', $this->getCacheTags($request));
+                $response->headers->add(['Cache-Tags' => $tags]);
+            }
         }
 
         return $response;
+    }
+
+    protected function hasCacheTags(Request $request): bool
+    {
+        return $request->attributes->has(CloudflareCache::TAGS_ATTR);
     }
 
     /**

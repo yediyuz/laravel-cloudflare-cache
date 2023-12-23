@@ -1,6 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: "#^Class App\\\\Http\\\\Middleware\\\\EncryptCookies not found\\.$#"
-			count: 1
-			path: config/cloudflare_cache.php
