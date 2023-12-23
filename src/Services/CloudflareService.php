@@ -10,7 +10,7 @@ use Illuminate\Http\Client\Response;
 class CloudflareService implements CloudflareServiceInterface
 {
     public function __construct(
-        private Factory $client,
+        private readonly Factory $client,
         private readonly string $apiEmail,
         private readonly string $apiKey,
         private readonly string $identifier,

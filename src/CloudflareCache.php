@@ -9,7 +9,7 @@ use Yediyuz\CloudflareCache\Services\CloudflareServiceInterface;
 
 class CloudflareCache implements CloudflareCacheInterface
 {
-    public const TAGS_ATTR = 'cloudflare_tags';
+    public const TAGS_ATTR = 'cloudflare_cache_tags';
 
     public const TTL_ATTR = 'cloudflare_cache_ttl';
 

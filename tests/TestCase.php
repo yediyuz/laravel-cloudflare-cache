@@ -47,7 +47,7 @@ class TestCase extends Orchestra
                 })->name('content_without_tags');
             });
 
-            Route::cache('tag1', 'tag2')->group(function () {
+            Route::cache(tags: ['tag1', 'tag2'], ttl: 600)->group(function () {
                 Route::get('/content_in_args', function () {
                     return 'content_in_args';
                 })->name('content_in_args');

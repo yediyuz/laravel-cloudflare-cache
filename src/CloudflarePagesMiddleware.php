@@ -14,7 +14,8 @@ class CloudflarePagesMiddleware
         /** @var Response $response */
         $response = $next($request);
         if ($this->shouldCacheResponse($request, $response)) {
-            $response->headers->add(['Cache-Control' => 'max-age=600, public']);
+            $ttl = $request->attributes->get(CloudflareCache::TTL_ATTR) ?? config('cloudflare_cache.cache_ttl', 600);
+            $response->headers->add(['Cache-Control' => "max-age=$ttl, public"]);
             $response->headers->remove('set-cookie');
 
             if ($this->hasCacheTags($request)) {

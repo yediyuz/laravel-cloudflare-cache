@@ -18,4 +18,6 @@ return [
     'api_key' => env('CLOUDFLARE_KEY'),
 
     'identifier' => env('CLOUDFLARE_IDENTIFIER'),
+
+    'cache_ttl' => env('CLOUDFLARE_CACHE_TTL'),
 ];

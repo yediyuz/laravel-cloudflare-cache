@@ -15,7 +15,7 @@ class CloudflareRouterMixin
 {
     public function cache(): Closure
     {
-        return function ($tags = null) {
+        return function (string|array|Closure $tags = null, $ttl = null) {
 
             $router = app()->make('router');
 
@@ -27,20 +27,24 @@ class CloudflareRouterMixin
                 return $this->withoutMiddleware(CloudflareCache::getIgnoredMiddlewares())->middleware(CloudflarePagesMiddleware::class);
             };
 
+            $registerTtl = function ($ttl, $request = null) {
+                $request = $request ?? request();
+                $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
+            };
+
             // cache()->group(fun...
-            if (is_null($tags)) {
+            if (blank($tags)) {
                 return $routeRegistrar();
             }
 
             // cache(function() { ... }
             if ($tags instanceof Closure) {
+                $registerTtl($ttl);
+
                 return $routeRegistrar()->group($tags);
             }
 
-            // cache('tag1', 'tag2')
-            if (! is_array($tags)) {
-                $tags = func_get_args();
-            }
+            $tags = Arr::wrap($tags);
 
             // cache(['tag1', 'tag2'])
             foreach ($tags as $index => $value) {
@@ -50,6 +54,7 @@ class CloudflareRouterMixin
             $request = request();
             $currentTags = $request->attributes->get(CloudflareCache::TAGS_ATTR, []);
             $request->attributes->set(CloudflareCache::TAGS_ATTR, array_merge($currentTags, $tags));
+            $registerTtl($ttl, $request);
 
             return $routeRegistrar();
         };
