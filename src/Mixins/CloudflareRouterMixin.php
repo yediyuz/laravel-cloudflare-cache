@@ -15,7 +15,7 @@ class CloudflareRouterMixin
 {
     public function cache(): Closure
     {
-        return function (string|array|Closure $tags = null, $ttl = null) {
+        return function (string|array|Closure $tags = null, int $ttl = null) {
 
             $router = app()->make('router');
 
@@ -39,12 +39,11 @@ class CloudflareRouterMixin
                 return $routeRegistrar()->group($tags);
             }
 
-            $tags = Arr::wrap($tags);
-
-            // cache(['tag1', 'tag2'])
-            foreach ($tags as $index => $value) {
-                $tags[$index] = (string) $value;
-            }
+            /**
+             * cache('tag1')
+             * cache(['tag1', 'tag2']).
+             */
+            $tags = Arr::where(Arr::wrap($tags), static fn ($tag) => is_string($tag) && filled($tag));
 
             $request = request();
             $currentTags = $request->attributes->get(CloudflareCache::TAGS_ATTR, []);
