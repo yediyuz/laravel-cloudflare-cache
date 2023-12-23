@@ -27,7 +27,7 @@ class CloudflareRouterMixin
                 return $this->withoutMiddleware(CloudflareCache::getIgnoredMiddlewares())->middleware(CloudflarePagesMiddleware::class);
             };
 
-            $registerTtl = function ($ttl, $request = null) {
+            $registerTtl = static function ($ttl, $request = null) {
                 $request = $request ?? request();
                 $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
             };
