@@ -14,6 +14,7 @@ class CloudflarePagesMiddleware
     {
         /** @var Response $response */
         $response = $next($request);
+        
         if ($this->shouldCacheResponse($request, $response)) {
             $ttl = $this->getCacheTTL($request);
             $response->headers->add(['Cache-Control' => "max-age=$ttl, public"]);
@@ -47,7 +48,7 @@ class CloudflarePagesMiddleware
             return $request->attributes->get(CloudflareCache::TTL_ATTR);
         }
 
-        return config('cloudflare_cache.cache_ttl', 600);
+        return config('cloudflare_cache.cache_ttl') ?? 600;
     }
 
     public function shouldCacheResponse(Request $request, Response $response): bool
