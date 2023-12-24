@@ -6,6 +6,7 @@ namespace Yediyuz\CloudflareCache;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yediyuz\CloudflareCache\Facades\CloudflareCache as CloudflareCacheFacade;
 
 class CloudflarePagesMiddleware
 {
@@ -59,7 +60,7 @@ class CloudflarePagesMiddleware
             return false;
         }
 
-        if (! app()->isProduction() && ! app()->runningUnitTests()) {
+        if (! CloudflareCacheFacade::isEnabled() && ! app()->runningUnitTests()) {
             return false;
         }
 
