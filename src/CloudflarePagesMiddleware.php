@@ -48,7 +48,7 @@ class CloudflarePagesMiddleware
             return $request->attributes->get(CloudflareCache::TTL_ATTR);
         }
 
-        return config('cloudflare_cache.cache_ttl') ?? 600;
+        return config('cloudflare_cache.default_cache_ttl') ?? 600;
     }
 
     public function shouldCacheResponse(Request $request, Response $response): bool
