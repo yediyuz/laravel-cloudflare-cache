@@ -1,10 +1,18 @@
 <?php
 
-/** @noinspection PhpUndefinedClassInspection */
-
 declare(strict_types=1);
 
 return [
+    'debug' => env('CLOUDFLARE_CACHE_DEBUG', false),
+
+    'api_email' => env('CLOUDFLARE_CACHE_EMAIL'),
+
+    'api_key' => env('CLOUDFLARE_CACHE_KEY'),
+
+    'identifier' => env('CLOUDFLARE_CACHE_IDENTIFIER'),
+
+    'cache_ttl' => env('CLOUDFLARE_CACHE_TTL'),
+
     'ignored_middlewares' => [
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Cookie\Middleware\EncryptCookies::class,
@@ -12,12 +20,4 @@ return [
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\EncryptCookies::class,
     ],
-
-    'api_email' => env('CLOUDFLARE_EMAIL'),
-
-    'api_key' => env('CLOUDFLARE_KEY'),
-
-    'identifier' => env('CLOUDFLARE_IDENTIFIER'),
-
-    'cache_ttl' => env('CLOUDFLARE_CACHE_TTL'),
 ];
