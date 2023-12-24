@@ -2,14 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Client\Request;
-use Illuminate\Http\Client\Response;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Route;
-use Yediyuz\CloudflareCache\CloudflareCache;
-use Yediyuz\CloudflareCache\Mixins\CloudflareRouterMixin;
-
-
 test('cache bulunmayan sayfalarda session cookie mevcut olmalıdır', function () {
     $response = $this->get(route('cloudflare_cache.home'));
 
