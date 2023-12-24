@@ -14,7 +14,7 @@ class CloudflarePagesMiddleware
     {
         /** @var Response $response */
         $response = $next($request);
-        
+
         if ($this->shouldCacheResponse($request, $response)) {
             $ttl = $this->getCacheTTL($request);
             $response->headers->add(['Cache-Control' => "max-age=$ttl, public"]);
