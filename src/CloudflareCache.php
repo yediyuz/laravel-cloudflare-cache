@@ -92,4 +92,13 @@ class CloudflareCache implements CloudflareCacheInterface
             'files' => $urls,
         ]);
     }
+
+    public function isEnabled(): bool
+    {
+        if (config('cloudflare_cache.debug')) {
+            return true;
+        }
+
+        return app()->isProduction();
+    }
 }
