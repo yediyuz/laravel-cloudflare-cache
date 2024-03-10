@@ -19,6 +19,6 @@ class CloudflareCache extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'cloudflare_cache';
+        return 'cloudflare-cache';
     }
 }

@@ -29,9 +29,9 @@ class TestCase extends Orchestra
         config()->set('app.key', 'base64:' . base64_encode(Encrypter::generateKey(config()['app.cipher'])));
         config()->set('database.default', 'testing');
 
-        config()->set('cloudflare_cache.api_email', '');
-        config()->set('cloudflare_cache.api_key', '');
-        config()->set('cloudflare_cache.identifier', '');
+        config()->set('cloudflare-cache.api_email', '');
+        config()->set('cloudflare-cache.api_key', '');
+        config()->set('cloudflare-cache.identifier', '');
     }
 
     protected function registerTestRoutes(): void
@@ -67,7 +67,7 @@ class TestCase extends Orchestra
         };
 
         Route::middleware('web')
-             ->name('cloudflare_cache.')
+             ->name('cloudflare-cache.')
              ->group(function () use ($routes) {
                  $routes();
              });

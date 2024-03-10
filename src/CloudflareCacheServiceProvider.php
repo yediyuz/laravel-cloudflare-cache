@@ -18,7 +18,7 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('cloudflare_cache')
+        $package->name('cloudflare-cache')
                 ->hasConfigFile()
                 ->hasCommand(CloudflareCacheCommand::class);
     }
@@ -37,16 +37,16 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
 
     public function registerClient(): static
     {
-        $this->app->bind('cloudflare_cache.client', function ($app): Factory {
+        $this->app->bind('cloudflare-cache.client', function ($app): Factory {
             return $app[Factory::class];
         });
 
         $this->app->singleton(CloudflareServiceInterface::class, function ($app): CloudflareService {
             return new CloudflareService(
-                $app->make('cloudflare_cache.client'),
-                config('cloudflare_cache.api_email'),
-                config('cloudflare_cache.api_key'),
-                config('cloudflare_cache.identifier'),
+                $app->make('cloudflare-cache.client'),
+                config('cloudflare-cache.api_email'),
+                config('cloudflare-cache.api_key'),
+                config('cloudflare-cache.identifier'),
             );
         });
 
@@ -61,6 +61,6 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
             );
         });
 
-        $this->app->alias(CloudflareCacheInterface::class, 'cloudflare_cache');
+        $this->app->alias(CloudflareCacheInterface::class, 'cloudflare-cache');
     }
 }
