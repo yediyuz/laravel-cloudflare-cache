@@ -3,15 +3,23 @@
 declare(strict_types=1);
 
 return [
-    'debug' => env('CLOUDFLARE_CACHE_DEBUG', false),
+    'debug'      => env('CLOUDFLARE_CACHE_DEBUG', false),
 
-    // your cloudflare email address
-    'api_email' => env('CLOUDFLARE_CACHE_EMAIL'),
+    /**
+     * Cloudflare E-mail address.
+     */
+    'api_email'  => env('CLOUDFLARE_CACHE_EMAIL'),
 
-    // Generate global api key https://dash.cloudflare.com/profile/api-tokens
-    'api_key' => env('CLOUDFLARE_CACHE_KEY'),
+    /**
+     * Generate global api key.
+     *
+     * @see https://dash.cloudflare.com/profile/api-tokens
+     */
+    'api_key'    => env('CLOUDFLARE_CACHE_KEY'),
 
-    // zone_id of your site on cloudflare dashboard
+    /**
+     * zone_id of your site on cloudflare dashboard.
+     */
     'identifier' => env('CLOUDFLARE_CACHE_IDENTIFIER'),
 
     'default_cache_ttl' => env('CLOUDFLARE_DEFAULT_CACHE_TTL'),
