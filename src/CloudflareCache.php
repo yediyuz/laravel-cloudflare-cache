@@ -93,7 +93,7 @@ class CloudflareCache implements CloudflareCacheInterface
         ]);
     }
 
-    public function isEnabled(): bool
+    public function isActive(): bool
     {
         if (app()->runningUnitTests()) {
             return true;
