@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class CloudflareCacheCommand extends Command
 {
-    public $signature = 'laravel-cloudflare-cache';
+    public $signature = 'cloudflare-cache';
 
     public $description = 'My command';
 

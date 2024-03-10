@@ -9,9 +9,9 @@ use Yediyuz\CloudflareCache\Services\CloudflareServiceInterface;
 
 class CloudflareCache implements CloudflareCacheInterface
 {
-    public const TAGS_ATTR = 'cloudflare_cache_tags';
+    public const TAGS_ATTR = 'cloudflare-cache-tags';
 
-    public const TTL_ATTR = 'cloudflare_cache_ttl';
+    public const TTL_ATTR = 'cloudflare-cache-ttl';
 
     public function __construct(private readonly CloudflareServiceInterface $service)
     {
@@ -23,7 +23,7 @@ class CloudflareCache implements CloudflareCacheInterface
      */
     public static function getIgnoredMiddlewares(): array
     {
-        return Arr::where(config('cloudflare_cache.ignored_middlewares', []), static fn ($middleware) => class_exists($middleware));
+        return Arr::where(config('cloudflare-cache.ignored_middlewares', []), static fn ($middleware) => class_exists($middleware));
     }
 
     /**
@@ -95,7 +95,7 @@ class CloudflareCache implements CloudflareCacheInterface
 
     public function isEnabled(): bool
     {
-        if (config('cloudflare_cache.debug')) {
+        if (config('cloudflare-cache.debug')) {
             return true;
         }
 
