@@ -11,9 +11,9 @@ class CloudflareService implements CloudflareServiceInterface
 {
     public function __construct(
         private readonly Factory $client,
-        private readonly string $apiEmail,
-        private readonly string $apiKey,
-        private readonly string $identifier,
+        private readonly ?string $apiEmail,
+        private readonly ?string $apiKey,
+        private readonly ?string $identifier,
     ) {
         // .
     }
