@@ -11,7 +11,7 @@ return [
 
     'identifier' => env('CLOUDFLARE_CACHE_IDENTIFIER'),
 
-    'cache_ttl' => env('CLOUDFLARE_CACHE_TTL'),
+    'default_cache_ttl' => env('CLOUDFLARE_DEFAULT_CACHE_TTL'),
 
     'ignored_middlewares' => [
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
