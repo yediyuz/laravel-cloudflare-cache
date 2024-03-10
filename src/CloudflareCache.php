@@ -93,8 +93,19 @@ class CloudflareCache implements CloudflareCacheInterface
         ]);
     }
 
-    public function isEnabled(): bool
+    public function isActive(): bool
     {
+        if (app()->runningUnitTests()) {
+            return true;
+        }
+
+        if (! config('cloudflare-cache.api_email')
+            || ! config('cloudflare-cache.api_key')
+            || ! config('cloudflare-cache.identifier')
+        ) {
+            return false;
+        }
+
         if (config('cloudflare-cache.debug')) {
             return true;
         }

@@ -61,7 +61,7 @@ class CloudflarePagesMiddleware
             return false;
         }
 
-        if (! CloudflareCacheFacade::isEnabled() && ! app()->runningUnitTests()) {
+        if (! CloudflareCacheFacade::isActive() && ! app()->runningUnitTests()) {
             return false;
         }
 
