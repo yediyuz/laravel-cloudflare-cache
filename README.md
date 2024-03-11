@@ -1,5 +1,8 @@
-![Package Image](https://banners.beyondco.de/Laravel%20Cloudflare%20Cache.png?theme=dark&packageManager=composer+require&packageName=yediyuz%2Flaravel-cloudflare-cache&pattern=architect&style=style_1&description=Serve+millions+of+requests+by+caching+with+Cloudflare&md=1&showWatermark=0&fontSize=100px&images=server#gh-dark-mode-only)
-![Package Image](https://banners.beyondco.de/Laravel%20Cloudflare%20Cache.png?theme=light&packageManager=composer+require&packageName=yediyuz%2Flaravel-cloudflare-cache&pattern=architect&style=style_1&description=Serve+millions+of+requests+by+caching+with+Cloudflare&md=1&showWatermark=0&fontSize=100px&images=server#gh-light-mode-only)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://banners.beyondco.de/Laravel%20Cloudflare%20Cache.png?theme=dark&packageManager=composer+require&packageName=yediyuz%2Flaravel-cloudflare-cache&pattern=architect&style=style_1&description=Serve+millions+of+requests+by+caching+with+Cloudflare&md=1&showWatermark=0&fontSize=100px&images=server">
+  <source media="(prefers-color-scheme: light)" srcset="https://banners.beyondco.de/Laravel%20Cloudflare%20Cache.png?theme=light&packageManager=composer+require&packageName=yediyuz%2Flaravel-cloudflare-cache&pattern=architect&style=style_1&description=Serve+millions+of+requests+by+caching+with+Cloudflare&md=1&showWatermark=0&fontSize=100px&images=server">
+  <img alt="Package Image" src="https://banners.beyondco.de/Laravel%20Cloudflare%20Cache.png?theme=light&packageManager=composer+require&packageName=yediyuz%2Flaravel-cloudflare-cache&pattern=architect&style=style_1&description=Serve+millions+of+requests+by+caching+with+Cloudflare&md=1&showWatermark=0&fontSize=100px&images=server">
+</picture>
 
 # Laravel Cloudflare Cache
 
