@@ -9,6 +9,8 @@
     <a href="https://github.com/mertasan/tailwindcss-variables/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?label=license" alt="License"></a>
 </p>
 
+You can serve millions of requests with this package. This package provides cacheable routes for Cloudflare. Thanks to Cloudflare, your static pages are served efficiently, reducing the load on your servers if they are cached for the TTL (Time to Live) duration. You can purge the cache whenever you need with this package.
+
 ## Installation
 
 You can install the package via composer:
@@ -24,6 +26,7 @@ php artisan vendor:publish --tag="cloudflare-cache-config"
 ```
 
 Add environment variables to .env file
+
 ```dotenv
 CLOUDFLARE_CACHE_EMAIL=info@example.com #Cloudflare account email address
 CLOUDFLARE_CACHE_KEY=XXXXXXX #Cloudflare API_KEY
@@ -31,6 +34,22 @@ CLOUDFLARE_CACHE_IDENTIFIER=XXXXXXX #ZONE_ID
 CLOUDFLARE_DEFAULT_CACHE_TTL=600 #10 minutes
 CLOUDFLARE_CACHE_DEBUG=false
 ```
+
+### Add `Rule` on Cloudflare
+To active caching on static pages, you need to add `page rule` **OR** `cache rule` on Cloudflare.
+
+For page rule:
+- If the URL matches: `www.example.com/*`
+- Setting: Cache Level
+- Value: Cache Everything
+
+For the cache rule:
+- Field: hostname
+- Operator: equals
+- Value: `example.com`
+- Then: Eligible for cache
+
+https://developers.cloudflare.com/cache/how-to/cache-rules/create-dashboard/
 
 ## Usage
 
@@ -56,6 +75,10 @@ Route::cache(tags: ['staticPages'])->group(function () {
     //
 });
 ```
+
+> [!WARNING]  
+> Be careful caching your routes! Do not cache your dynamic pages such as admin panel or form based pages!
+
 ### Clear Cache
 
 #### Purges everything
