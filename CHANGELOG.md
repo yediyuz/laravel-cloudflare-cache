@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-cloudflare-cache` will be documented in this file.
 
+## Laravel 11  - 2024-03-14
+
+### What's Changed
+
+* Rename package key by @mertasan in https://github.com/yediyuz/laravel-cloudflare-cache/pull/8
+* Rename isEnabled method to isActive by @mertasan in https://github.com/yediyuz/laravel-cloudflare-cache/pull/10
+* Bump actions/cache from 3 to 4 by @dependabot in https://github.com/yediyuz/laravel-cloudflare-cache/pull/6
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/yediyuz/laravel-cloudflare-cache/pull/7
+* Updated readme by @emredipi in https://github.com/yediyuz/laravel-cloudflare-cache/pull/11
+* Laravel 11 Compatibility by @emredipi in https://github.com/yediyuz/laravel-cloudflare-cache/pull/12
+
+**Full Changelog**: https://github.com/yediyuz/laravel-cloudflare-cache/compare/v1.1.0...v1.2.0
+
 ## v1.1.0 - 2023-12-24
 
 ### What's Changed
