@@ -47,6 +47,7 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
                 config('cloudflare-cache.api_email'),
                 config('cloudflare-cache.api_key'),
                 config('cloudflare-cache.identifier'),
+                config('cloudflare-cache.api_token'),
             );
         });
 
