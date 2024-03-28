@@ -30,9 +30,20 @@ php artisan vendor:publish --tag="cloudflare-cache-config"
 
 Add environment variables to .env file
 
+##### Using global api key:
+
 ```dotenv
 CLOUDFLARE_CACHE_EMAIL=info@example.com #Cloudflare account email address
-CLOUDFLARE_CACHE_KEY=XXXXXXX #Cloudflare API_KEY
+CLOUDFLARE_CACHE_KEY=XXXXXXX #Cloudflare global api key
+CLOUDFLARE_CACHE_IDENTIFIER=XXXXXXX #ZONE_ID
+CLOUDFLARE_DEFAULT_CACHE_TTL=600 #10 minutes
+CLOUDFLARE_CACHE_DEBUG=false
+```
+
+##### Using fine-grained api token:
+
+```dotenv
+CLOUDFLARE_CACHE_API_TOKEN=XXXXXXX
 CLOUDFLARE_CACHE_IDENTIFIER=XXXXXXX #ZONE_ID
 CLOUDFLARE_DEFAULT_CACHE_TTL=600 #10 minutes
 CLOUDFLARE_CACHE_DEBUG=false
