@@ -31,7 +31,7 @@ class CloudflarePagesMiddleware
 
     protected function hasCacheTags(Request $request): bool
     {
-        return $request->attributes->has(CloudflareCache::TAGS_ATTR);
+        return filled($request->attributes->get(CloudflareCache::TAGS_ATTR));
     }
 
     /**
