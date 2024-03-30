@@ -50,8 +50,9 @@ class CloudflareRouterMixin
             $tags = Arr::where(Arr::wrap($tags), static fn ($tag) => is_string($tag) && filled($tag));
 
             $request = request();
-            $currentTags = $request->attributes->get(CloudflareCache::TAGS_ATTR, []);
-            $request->attributes->set(CloudflareCache::TAGS_ATTR, array_merge($currentTags, $tags));
+            if ($currentTags = $request->attributes->get(CloudflareCache::TAGS_ATTR)) {
+                $request->attributes->set(CloudflareCache::TAGS_ATTR, array_merge($currentTags, $tags));
+            }
             $registerTtl($ttl, $request);
 
             return $routeRegistrar();
