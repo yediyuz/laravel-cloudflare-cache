@@ -23,36 +23,23 @@ class CloudflareRouterMixin
                 $router->middlewarePriority = Arr::prepend($router->middlewarePriority, CloudflarePagesMiddleware::class);
             }
 
-            $routeRegistrar = function () {
-                return $this->withoutMiddleware(CloudflareCache::getIgnoredMiddlewares())->middleware(CloudflarePagesMiddleware::class);
-            };
+            $parameters = [
+                'ttl'  => $ttl,
+                'tags' => $tags instanceof Closure
+                    ? ''
+                    : collect(Arr::wrap($tags))
+                        ->where(static fn ($tag) => is_string($tag) && filled($tag))
+                        ->implode(';'),
+            ];
 
-            $registerTtl = static function ($ttl, $request = null) {
-                if ($ttl === null) {
-                    return;
-                }
-
-                $request = $request ?? request();
-                $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
+            $routeRegistrar = function () use ($parameters) {
+                return $this->withoutMiddleware(CloudflareCache::getIgnoredMiddlewares())->middleware(CloudflarePagesMiddleware::class . ":{$parameters['ttl']},{$parameters['tags']}");
             };
 
             // cache(function() { ... }
             if ($tags instanceof Closure) {
-                $registerTtl($ttl);
-
                 return $routeRegistrar()->group($tags);
             }
-
-            /**
-             * cache('tag1')
-             * cache(['tag1', 'tag2']).
-             */
-            $tags = Arr::where(Arr::wrap($tags), static fn ($tag) => is_string($tag) && filled($tag));
-
-            $request = request();
-            $currentTags = $request->attributes->get(CloudflareCache::TAGS_ATTR, []);
-            $request->attributes->set(CloudflareCache::TAGS_ATTR, array_merge($currentTags, $tags));
-            $registerTtl($ttl, $request);
 
             return $routeRegistrar();
         };
