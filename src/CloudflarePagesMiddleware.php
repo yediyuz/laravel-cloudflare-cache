@@ -10,36 +10,47 @@ use Yediyuz\CloudflareCache\Facades\CloudflareCache as CloudflareCacheFacade;
 
 class CloudflarePagesMiddleware
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $ttl, $tags): Response
     {
         /** @var Response $response */
         $response = $next($request);
 
-        if ($this->shouldCacheResponse($request, $response)) {
-            $ttl = $this->getCacheTTL($request);
-            $response->headers->add(['Cache-Control' => "max-age=$ttl, public"]);
-            $response->headers->remove('set-cookie');
+        if (! $this->shouldCacheResponse($request, $response)) {
+            return $response;
+        }
 
-            if ($this->hasCacheTags($request)) {
-                $tags = implode(',', $this->getCacheTags($request));
-                $response->headers->add(['Cache-Tags' => $tags]);
-            }
+        if (! $ttl) {
+            $ttl = $request->attributes->get(
+                CloudflareCache::TTL_ATTR,
+                config('cloudflare-cache.default_cache_ttl') ?? 600
+            );
+        }
+
+        $response->headers->set('Cache-Control', "max-age=$ttl, public");
+        $request->attributes->set(CloudflareCache::TTL_ATTR, $ttl);
+        $response->headers->remove('set-cookie');
+
+        if ($tags = $this->getCacheTags($request, $tags)) {
+            $response->headers->set('Cache-Tags', implode(',', $tags));
         }
 
         return $response;
     }
 
-    protected function hasCacheTags(Request $request): bool
-    {
-        return filled($request->attributes->get(CloudflareCache::TAGS_ATTR));
-    }
-
     /**
      * @return array<int, string>
      */
-    protected function getCacheTags(Request $request): array
+    protected function getCacheTags(Request $request, string $tags): array
     {
-        return array_merge(array_unique($request->attributes->get(CloudflareCache::TAGS_ATTR, [])));
+        /**
+         * cache('tag1')
+         * cache(['tag1', 'tag2']).
+         */
+        $tags = $tags ? explode(';', $tags) : [];
+        $tags = array_unique(array_merge($request->attributes->get(CloudflareCache::TAGS_ATTR, []), $tags));
+        $request->attributes->set(CloudflareCache::TAGS_ATTR, $tags);
+
+        return $tags;
     }
 
     protected function getCacheTTL(Request $request): int

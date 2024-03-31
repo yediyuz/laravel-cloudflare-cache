@@ -26,23 +26,23 @@ test('cache tag türleri beklendiği gibi filtrelenmelidir', function ($tags, $e
     $this->assertFalse($request->attributes->has(CloudflareCache::TAGS_ATTR));
     $this->assertFalse($request->attributes->has(CloudflareCache::TTL_ATTR));
 
-    Route::cache($tags, $ttl);
+    Route::cache($tags, $ttl)->get('/test', function () {
+        return 'test';
+    });
 
-    ray($request->attributes);
-
-    expect($request->attributes)
-        ->has(CloudflareCache::TAGS_ATTR)
-        ->toBeTrue()
-        ->get(CloudflareCache::TAGS_ATTR)
-        ->toEqual($expectedTags)
-        ->and($request->attributes)
-        ->match($ttl, [
-            null => fn ($attributes) => $attributes->has(CloudflareCache::TTL_ATTR)->toBeFalse(),
-            600  => fn ($attributes) => $attributes->has(CloudflareCache::TTL_ATTR)->toBeTrue(),
-        ]);
+    $response = $this->get('test');
+    expect($response)->assertHeader('Cache-Tags', implode(',', $expectedTags));
 
 })->with('cache_mixin_tag_types')
   ->with([
       null,
       600,
   ]);
+
+test('cache tag must exist in the header only if used', function () {
+    $response = $this->get('content_without_tags');
+    $this->assertFalse($response->headers->has('Cache-Tags'));
+
+    $response = $this->get('content_in_args');
+    $this->assertTrue($response->headers->has('Cache-Tags'));
+});
