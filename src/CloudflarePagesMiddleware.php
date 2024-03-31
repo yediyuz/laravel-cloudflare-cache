@@ -10,7 +10,7 @@ use Yediyuz\CloudflareCache\Facades\CloudflareCache as CloudflareCacheFacade;
 
 class CloudflarePagesMiddleware
 {
-    public function handle(Request $request, Closure $next, $ttl, $tags): Response
+    public function handle(Request $request, Closure $next, string $ttl, string $tags): Response
     {
         /** @var Response $response */
         $response = $next($request);
