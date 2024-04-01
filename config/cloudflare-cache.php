@@ -18,6 +18,11 @@ return [
     'api_key'    => env('CLOUDFLARE_CACHE_KEY'),
 
     /**
+     * Fine-grained api token.
+     */
+    'api_token'    => env('CLOUDFLARE_CACHE_API_TOKEN'),
+
+    /**
      * zone_id of your site on cloudflare dashboard.
      */
     'identifier' => env('CLOUDFLARE_CACHE_IDENTIFIER'),

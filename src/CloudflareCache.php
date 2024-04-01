@@ -99,11 +99,14 @@ class CloudflareCache implements CloudflareCacheInterface
             return true;
         }
 
-        if (! config('cloudflare-cache.api_email')
-            || ! config('cloudflare-cache.api_key')
-            || ! config('cloudflare-cache.identifier')
-        ) {
+        if (! config('cloudflare-cache.identifier')) {
             return false;
+        }
+
+        if (! config('cloudflare-cache.api_token')) {
+            if (! config('cloudflare-cache.api_email') || ! config('cloudflare-cache.api_key')) {
+                return false;
+            }
         }
 
         if (config('cloudflare-cache.debug')) {

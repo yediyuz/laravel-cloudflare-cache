@@ -14,6 +14,7 @@ class CloudflareService implements CloudflareServiceInterface
         private readonly ?string $apiEmail,
         private readonly ?string $apiKey,
         private readonly ?string $identifier,
+        private readonly ?string $apiToken,
     ) {
         // .
     }
@@ -21,10 +22,10 @@ class CloudflareService implements CloudflareServiceInterface
     private function request(): PendingRequest
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->client->withHeaders([
-            'X-Auth-Email' => $this->apiEmail,
-            'X-Auth-Key'   => $this->apiKey,
-        ]);
+        return $this->client->withHeaders($this->apiToken
+            ? ['Authorization' => 'Bearer ' . $this->apiToken]
+            : ['X-Auth-Email' => $this->apiEmail, 'X-Auth-Key' => $this->apiKey]
+        );
     }
 
     protected function getBaseUrl(string $endpoint): string
