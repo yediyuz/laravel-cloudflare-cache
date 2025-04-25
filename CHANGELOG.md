@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-cloudflare-cache` will be documented in this file.
 
+## v2.0.0 - 2025-04-25
+
+### What's Changed
+
+* Fixed cache-tags by @emredipi in https://github.com/yediyuz/laravel-cloudflare-cache/pull/18
+* Add Laravel 12 Support by @mertasan in https://github.com/yediyuz/laravel-cloudflare-cache/pull/24
+
+**Full Changelog**: https://github.com/yediyuz/laravel-cloudflare-cache/compare/v1.2.0...v2.0.0
+
 ## Laravel 11  - 2024-03-14
 
 ### What's Changed
