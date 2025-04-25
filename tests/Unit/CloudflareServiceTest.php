@@ -6,7 +6,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-test('example test', function () {
+test('cache test', function () {
     Http::fake();
 
     $service = app()->make(\Yediyuz\CloudflareCache\Services\CloudflareServiceInterface::class);

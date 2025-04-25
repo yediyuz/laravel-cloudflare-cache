@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache;
 
 use Illuminate\Http\Client\Factory;
@@ -19,8 +20,8 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name('cloudflare-cache')
-                ->hasConfigFile()
-                ->hasCommand(CloudflareCacheCommand::class);
+            ->hasConfigFile()
+            ->hasCommand(CloudflareCacheCommand::class);
     }
 
     /**
@@ -29,10 +30,10 @@ class CloudflareCacheServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->registerClient()
-             ->registerCloudflareCache();
+            ->registerCloudflareCache();
 
         // Route mixin
-        Router::mixin(new CloudflareRouterMixin());
+        Router::mixin(new CloudflareRouterMixin);
     }
 
     public function registerClient(): static

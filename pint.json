@@ -1,0 +1,119 @@
+{
+  "preset": "laravel",
+  "rules": {
+    "declare_strict_types": false,
+    "phpdoc_no_empty_return": false,
+    "single_trait_insert_per_statement": true,
+    "binary_operator_spaces": {
+      "default": "single_space",
+      "operators": {
+        "|": "no_space"
+      }
+    },
+    "not_operator_with_space": false,
+    "blank_line_before_statement": {
+      "statements": [
+        "break",
+        "continue",
+        "declare",
+        "return",
+        "throw",
+        "try"
+      ]
+    },
+    "concat_space": {
+      "spacing": "one"
+    },
+    "no_trailing_comma_in_singleline": {
+      "elements": [
+        "arguments",
+        "array_destructuring",
+        "array",
+        "group_import"
+      ]
+    },
+    "phpdoc_annotation_without_dot": true,
+    "phpdoc_trim_consecutive_blank_line_separation": false,
+    "phpdoc_var_annotation_correct_order": true,
+    "blank_lines_before_namespace": {
+      "min_line_breaks": 2,
+      "max_line_breaks": 2
+    },
+    "visibility_required": {
+      "elements": [
+        "property",
+        "method",
+        "const"
+      ]
+    },
+    "global_namespace_import": {
+      "import_classes": true,
+      "import_constants": null,
+      "import_functions": null
+    },
+    "phpdoc_order": {
+      "order": [
+        "noinspection",
+        "deprecated",
+        "author",
+        "copyright",
+        "license",
+        "see",
+        "link",
+        "todo",
+        "example",
+        "property",
+        "method",
+        "api",
+        "template",
+        "phpstan-template",
+        "param",
+        "phpstan-param",
+        "phpstan-return",
+        "return",
+        "throws"
+      ]
+    },
+    "phpdoc_separation": {
+      "groups": [
+        [
+          "noinspection"
+        ],
+        [
+          "deprecated",
+          "link",
+          "see",
+          "since"
+        ],
+        [
+          "author",
+          "copyright",
+          "license"
+        ],
+        [
+          "category",
+          "package",
+          "subpackage"
+        ],
+        [
+          "throws"
+        ],
+        [
+          "property",
+          "property-read",
+          "property-write"
+        ],
+        [
+          "phpstan-template",
+          "template",
+          "param",
+          "phpstan-param"
+        ],
+        [
+          "phpstan-return",
+          "return"
+        ]
+      ]
+    }
+  }
+}

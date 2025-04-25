@@ -24,23 +24,22 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.8",
-        "illuminate/contracts": "^10.10|^11.0",
-        "illuminate/routing": "^10.10|^11.0",
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.8.2",
+        "illuminate/contracts": "^11.0|^12.9.2",
+        "illuminate/routing": "^11.0|^12.9.2",
+        "laravel/pint": "^1.22",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
-        "larastan/larastan": "^2.0",
-        "laravel/framework": "^10.10|^11.0",
-        "nunomaduro/collision": "^7.0|^8.0",
-        "orchestra/testbench": "^8.18|^9.0",
-        "pestphp/pest": "^2.28",
-        "pestphp/pest-plugin-laravel": "^2.2",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpcov": "^9.0.2",
-        "spatie/laravel-ray": "^1.32",
-        "yediyuz/dev-tools": "1.x-dev"
+        "larastan/larastan": "^3.0",
+        "laravel/framework": "^11.0|^12.9.2",
+        "nunomaduro/collision": "^8.1.1",
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^3.8.2",
+        "pestphp/pest-plugin-laravel": "^3.8.2",
+        "phpstan/phpstan": "^2.0",
+        "spatie/laravel-ray": "^1.40.1"
     },
     "autoload": {
         "psr-4": {
@@ -53,17 +52,17 @@
         }
     },
     "scripts": {
-        "lint": "php-cs-fixer fix -v",
+        "lint": "pint",
         "test": "vendor/bin/pest --colors=always --parallel",
         "test:coverage": "@test --coverage-php ./coverage/cov/default.cov",
         "test:coverage:html": "@test --coverage-html coverage/html/default",
-        "test:lint": "php-cs-fixer fix -v --dry-run",
+        "test:lint": "pint --test",
         "test:styles": "vendor/bin/phpstan analyse --ansi",
         "test:styles:pro": "vendor/bin/phpstan analyse --pro --fix --watch"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-master": "2.x-dev"
         },
         "laravel": {
             "providers": [

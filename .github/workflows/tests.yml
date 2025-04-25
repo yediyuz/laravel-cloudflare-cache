@@ -17,25 +17,27 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php-version: [ 8.1 ]
+        php-version: [ 8.2 ]
         coverage-file: [ default ]
-        laravel: [ 10.* ]
+        laravel: [ 11.*, 12.* ]
         stability: [ prefer-lowest, prefer-stable ]
         include:
-          - laravel: 10.*
-            testbench: 8.18.*
+          - laravel: 11.*
+            testbench: 9.*
+          - laravel: 12.*
+            testbench: 10.*
 
     name: PHP ${{ matrix.php-version }} - L${{ matrix.laravel }} - T${{ matrix.testbench }} - ${{ matrix.stability }}
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
-          tools: composer:v2, php-cs-fixer, phpunit
+          tools: composer:v2
           coverage: none
 
       - name: Validate Composer
@@ -75,10 +77,10 @@ jobs:
         #- name: Remove auth.json File
         #  run: rm -f $GITHUB_WORKSPACE/auth.json
 
-        
+
       - name: Run Tests
         run: composer test
-        
-        
 
-  
+
+
+

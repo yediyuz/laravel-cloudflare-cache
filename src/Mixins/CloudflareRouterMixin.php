@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache\Mixins;
 
 use Closure;
@@ -15,7 +16,7 @@ class CloudflareRouterMixin
 {
     public function cache(): Closure
     {
-        return function (string|array|Closure $tags = null, int $ttl = null) {
+        return function (string|array|Closure|null $tags = null, ?int $ttl = null) {
 
             $router = app()->make('router');
 
@@ -24,7 +25,7 @@ class CloudflareRouterMixin
             }
 
             $parameters = [
-                'ttl'  => $ttl,
+                'ttl' => $ttl,
                 'tags' => $tags instanceof Closure
                     ? ''
                     : collect(Arr::wrap($tags))

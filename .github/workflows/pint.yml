@@ -6,26 +6,26 @@ on:
 
 jobs:
 
-  php-cs-fixer:
+  pint:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip lint')"
 
     strategy:
       matrix:
-        php-version: [ 8.1 ]
+        php-version: [ 8.2 ]
         #dependency-versions: [ lowest, highest ]
         dependency-versions: [ lowest ]
 
     name: PHP ${{ matrix.php-version }} | ${{ matrix.dependency-versions }}
     steps:
       - name: Checkout project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          tools: composer:v2, php-cs-fixer
+          tools: composer:v2
 
       #- name: Add HTTP Basic Auth Credentials
       #  run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
