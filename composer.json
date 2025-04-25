@@ -33,7 +33,7 @@
     },
     "require-dev": {
         "larastan/larastan": "^3.0",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^11.0|^12.9.2",
         "nunomaduro/collision": "^8.1.1",
         "orchestra/testbench": "^9.0|^10.0",
         "pestphp/pest": "^3.8.2",
