@@ -16,7 +16,7 @@ dataset('cache_mixin_tag_types', [
     [['foo', '', ' ', '0', '1'], ['foo', '0', '1']],
 ]);
 
-test('cache tag türleri beklendiği gibi filtrelenmelidir', function ($tags, $expectedTags, $ttl) {
+it('should filter cache tag types as expected', function ($tags, $expectedTags, $ttl) {
 
     $request = request();
 

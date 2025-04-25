@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-test('cache bulunmayan sayfalarda session cookie mevcut olmalıdır', function () {
+it('should have session cookie on non-cached pages', function () {
     $response = $this->get(route('cloudflare-cache.home'));
 
     $response->assertCookie('XSRF-TOKEN');
     $response->assertCookie('laravel_session');
 });
 
-test('cache bulunan sayfalarda session cookies mevcut olmamalıdır', function ($routeName) {
+it('should not have session cookies on cached pages', function ($routeName) {
 
     $response = $this->get(route($routeName));
 
