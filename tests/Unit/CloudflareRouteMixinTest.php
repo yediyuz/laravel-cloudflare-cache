@@ -12,7 +12,7 @@ dataset('cache_mixin_tag_types', [
     [['foo', []], ['foo']],
     [['foo', ['bar']], ['foo']],
     [['foo', true, false], ['foo']],
-    [['foo', new stdClass()], ['foo']],
+    [['foo', new stdClass], ['foo']],
     [['foo', '', ' ', '0', '1'], ['foo', '0', '1']],
 ]);
 
@@ -34,10 +34,10 @@ test('cache tag türleri beklendiği gibi filtrelenmelidir', function ($tags, $e
     expect($response)->assertHeader('Cache-Tags', implode(',', $expectedTags));
 
 })->with('cache_mixin_tag_types')
-  ->with([
-      null,
-      600,
-  ]);
+    ->with([
+        null,
+        600,
+    ]);
 
 test('cache tag must exist in the header only if used', function () {
     $response = $this->get('content_without_tags');

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache\Tests;
 
 use Illuminate\Encryption\Encrypter;
@@ -67,9 +68,9 @@ class TestCase extends Orchestra
         };
 
         Route::middleware('web')
-             ->name('cloudflare-cache.')
-             ->group(function () use ($routes) {
-                 $routes();
-             });
+            ->name('cloudflare-cache.')
+            ->group(function () use ($routes) {
+                $routes();
+            });
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache\Services;
 
 use Illuminate\Http\Client\Factory;
@@ -23,7 +24,7 @@ class CloudflareService implements CloudflareServiceInterface
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->client->withHeaders([
             'X-Auth-Email' => $this->apiEmail,
-            'X-Auth-Key'   => $this->apiKey,
+            'X-Auth-Key' => $this->apiKey,
         ]);
     }
 
@@ -33,7 +34,7 @@ class CloudflareService implements CloudflareServiceInterface
     }
 
     /**
-     * @param string[]|array<string, bool>|string[][] $data
+     * @param  string[]|array<string, bool>|string[][]  $data
      */
     public function post(string $endpoint, array $data = []): Response
     {
@@ -41,9 +42,9 @@ class CloudflareService implements CloudflareServiceInterface
     }
 
     /**
-     * @param array<int, string>|string|null $query
+     * @param  array<int, string>|string|null  $query
      */
-    public function get(string $endpoint, array|string $query = null): Response
+    public function get(string $endpoint, array|string|null $query = null): Response
     {
         return $this->request()->get($this->getBaseUrl($endpoint), $query);
     }

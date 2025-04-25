@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Yediyuz\CloudflareCache\CloudflareCache
  *
- * @method static bool        isActive()
+ * @method static bool isActive()
  * @method static bool|string purgeEverything()
  * @method static bool|string purgeByPrefixes(array $prefixes)
  * @method static bool|string purgeByTags(array $tags)

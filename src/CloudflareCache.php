@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Yediyuz\CloudflareCache;
 
 use Illuminate\Support\Arr;
@@ -27,7 +28,7 @@ class CloudflareCache implements CloudflareCacheInterface
     }
 
     /**
-     * @param array<string, array<int, string>|true> $options
+     * @param  array<string, array<int, string>|true>  $options
      */
     protected function purge(array $options = []): bool|string
     {
@@ -54,7 +55,7 @@ class CloudflareCache implements CloudflareCacheInterface
     }
 
     /**
-     * @param array<int, string> $prefixes
+     * @param  array<int, string>  $prefixes
      */
     public function purgeByPrefixes(array $prefixes): bool|string
     {
@@ -64,7 +65,7 @@ class CloudflareCache implements CloudflareCacheInterface
     }
 
     /**
-     * @param array<int, string> $tags
+     * @param  array<int, string>  $tags
      */
     public function purgeByTags(array $tags): bool|string
     {
@@ -74,7 +75,7 @@ class CloudflareCache implements CloudflareCacheInterface
     }
 
     /**
-     * @param array<int, string> $hosts
+     * @param  array<int, string>  $hosts
      */
     public function purgeByHosts(array $hosts): bool|string
     {
@@ -84,7 +85,7 @@ class CloudflareCache implements CloudflareCacheInterface
     }
 
     /**
-     * @param array<int, string> $urls
+     * @param  array<int, string>  $urls
      */
     public function purgeByUrls(array $urls): bool|string
     {
