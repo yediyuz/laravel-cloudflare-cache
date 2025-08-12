@@ -30,7 +30,7 @@ jobs:
     name: PHP ${{ matrix.php-version }} - L${{ matrix.laravel }} - T${{ matrix.testbench }} - ${{ matrix.stability }}
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
