@@ -109,7 +109,7 @@ CloudflareCache::purgeByUrls([
 ])
 ```
 
-#### Purges by prefixes (Enterprise only)
+#### Purges by prefixes
 https://developers.cloudflare.com/cache/how-to/purge-cache/purge_by_prefix/
 ```php
 CloudflareCache::purgeByPrefixes([
@@ -117,7 +117,7 @@ CloudflareCache::purgeByPrefixes([
 ])
 ```
 
-#### Purges by tags (Enterprise only)
+#### Purges by tags
 https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/
 ```php
 CloudflareCache::purgeByTags([
@@ -125,7 +125,7 @@ CloudflareCache::purgeByTags([
 ])
 ```
 
-#### Purges by hostname (Enterprise only)
+#### Purges by hostname
 https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-hostname/
 ```php
 CloudflareCache::purgeByHosts([
