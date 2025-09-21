@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-cloudflare-cache` will be documented in this file.
 
+## v2.1.0 - 2025-09-21
+
+### What's Changed
+
+* Support for Cloudflare API Token by @harryqt in https://github.com/yediyuz/laravel-cloudflare-cache/pull/13
+
+### New Contributors
+
+* @harryqt made their first contribution in https://github.com/yediyuz/laravel-cloudflare-cache/pull/13
+
+**Full Changelog**: https://github.com/yediyuz/laravel-cloudflare-cache/compare/v2.0.0...v2.1.0
+
 ## v2.0.0 - 2025-04-25
 
 ### What's Changed
