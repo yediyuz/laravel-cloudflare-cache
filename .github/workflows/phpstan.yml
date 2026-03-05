@@ -4,20 +4,21 @@ on:
   push:
     paths:
       - '**.php'
-      - 'phpstan.neon.dist'
+      - phpstan.neon.dist
 
 jobs:
   phpstan:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip styles')"
+
+    if: !contains(github.event.head_commit.message, 'skip ci') && !contains(github.event.head_commit.message, 'skip styles')
 
     strategy:
       matrix:
-        php-version: [ 8.2 ]
-        #dependency-versions: [ lowest, highest ]
-        dependency-versions: [ lowest ]
+        php-version: ['8.2', '8.3', '8.4', '8.5']
+        dependency-versions: [lowest]
 
     name: PHP ${{ matrix.php-version }} | ${{ matrix.dependency-versions }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -31,7 +32,7 @@ jobs:
         uses: ramsey/composer-install@v3
         with:
           dependency-versions: ${{ matrix.dependency-versions }}
-          composer-options: "--optimize-autoloader --no-interaction --no-progress"
+          composer-options: --optimize-autoloader --no-interaction --no-progress
 
       - name: Run PHPStan
         run: ./vendor/bin/phpstan --error-format=github
